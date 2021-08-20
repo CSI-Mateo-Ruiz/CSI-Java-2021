@@ -168,19 +168,19 @@ Select `upstream/main`
 
 What is the difference between Git and GitHub?
 
- - Answer:
+ - Answer: Git is a reposetory the allows you to store projects. Git also allows you to see changes done to your files.
 
 What is the difference between a git commit and a git push?
 
- - Answer:
+ - Answer: A commit saves the changes that you make to your local reposetory while a push sends all pending commits to your remote reposetory.
 
 What is the difference between a pull, and an upstream pull?
 
- - Answer:
+ - Answer: A pull changes your local repository with the changes made on the remote repository while an upstream pull grabs the changes from the repository of whatever you forked and applies them to your remote repository.
 
 Was any part of these instructions unclear or incomplete?
 
- - Answer:
+ - Answer: No, no part of the instruction were unclear or incomplete.
 
 Type down any class notes below this sentence:
 
@@ -194,5 +194,14 @@ Lackluster responses may result in point deductions.
 * ### You may complete the answers by issuing additional commits and pushing them before the next class.
 
 <br>
+
+
+<br>
+
+# Am i doing Something
+Hello 
+
+<br>
+
 
 ## [Next Module ->](/../../tree/main/Modules/Module2/Module2.md)
