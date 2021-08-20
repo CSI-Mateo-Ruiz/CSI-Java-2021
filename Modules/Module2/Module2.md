@@ -160,18 +160,18 @@
 What is a benefit of using Markdown?
 https://www.markdownguide.org/getting-started/
 
- - Answer:
+ - Answer: A benefit of using Markdown is that you can render a nice html webpage 
 
 What is a java class and what is a java package?
 
- - Answer:
+ - Answer: A java package is where you keep all the java classes and a Java class is where you write all the java code. 
 
 Add some cool original code into HelloWorld.py! Impress me.
 
 
 What part of the instructions was incomplete or unclear?
 
- - Answer:
+ - Answer: none 
 
 Type down any class notes below this sentence:
 
