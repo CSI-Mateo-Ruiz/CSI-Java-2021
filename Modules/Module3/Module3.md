@@ -125,18 +125,32 @@ print(age)
 
 What is the diference between a Java object and a primitive data type. List the primitives.
 
- - Answer:
+ - Answer: Un objeto es una referencia a multiples bloques de codigo y primitive data types son int, byte, short, long, float, double, boolean, and char.
 
-Correctly initialize every primitive data type twice(2 examples).
-
- - Answer:
+ 		
+ 		
+ Describe what an array is in your own words?
+ 
+  - Answer: An array is a group of anything.
+  
+  How do you address an index in an array? Write a code that assigns 34 to a new variable by accessing the value stored in: int[] arr = {4, 3, -1, 4, 34};
+ 		
+ - Answer: Int x = arr [4]
+ 
+ What is the first index on the list? Why?
+ 
+ - Answer: The first index on the list is 0 becasuse you start counting from zero.
+ 
+ Provide an original example of a null value It must prove your understanding of the concept.
+ 
+ - Answer: The amount of people from china living in america.		
 
 What part of the instructions was incomplete or unclear?
 
- - Answer:
+ - Answer: none
 
 Type down any class notes below this sentence:
-
+Todo en java es un objeto.
 
 
 
