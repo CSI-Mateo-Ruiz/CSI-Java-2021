@@ -113,18 +113,14 @@ public class Animal{
 <!-- Answer using full sentences to receive all points. -->
 <!-- 
 
-What is a benefit of using Markdown?
-https://www.markdownguide.org/getting-started/
+Include the link(s) you used to attain information for your selected animal
 
- - Answer:
-
-What is a java class and what is a java package?
-
- - Answer:
+ - Answer:https://en.wikipedia.org/wiki/Leptodactylus_fallax
+ 			https://en.wikipedia.org/wiki/Puerto_Rican_amazon
 
 What part of the instructions was incomplete or unclear?
 
- - Answer:
+ - Answer: nein
 
 Type down any class notes below this sentence:
 
