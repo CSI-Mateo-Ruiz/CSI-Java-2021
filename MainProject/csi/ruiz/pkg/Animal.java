@@ -64,6 +64,8 @@ taxonomy: %s""",name, age,scientificName, taxonomy.toString());
 				
 				return tomas;
 	}
+	
+	
 
 	// Main Method
 	public static void main(String[] args) {
@@ -71,7 +73,7 @@ taxonomy: %s""",name, age,scientificName, taxonomy.toString());
 		a.setName("Mountain Chiken");
 		a.setAge(6);
 		a.setScientificName("Leptodactylus fallax");
-
+		Taxonomy chickent = new Taxonomy("Eukaryote","animalia","Chordata","Amphibia","anura","leptodactylidae","leptodactylus","leptodactylus fallax"); 
 		System.out.println("Name: " + a.getName());
 		System.out.println("Age: " + a.getAge());
 		System.out.println("Scientific Name: " + a.getScientificName());
@@ -80,7 +82,8 @@ taxonomy: %s""",name, age,scientificName, taxonomy.toString());
 		System.out.println("Name: " + a2.getName());
 		System.out.println("Age: " + a2.getAge());
 		System.out.println("Scientific Name: " + a2.getScientificName());
-		
+		Taxonomy cottorrat = new Taxonomy("Eukaryote","Animalia","Chordata","Aves","Psittaciformes","Psittacidae","Amazona","Amazona vitata");
+
 		System.out.println();
 		Taxonomy t = new Taxonomy("Eukaryote","Animalia","Aves","Passeriformes","Fringillidae","Carduelinae","Serinus","canaria");
 //		System.out.println("    Canary Taxonomy       ");
@@ -95,6 +98,12 @@ taxonomy: %s""",name, age,scientificName, taxonomy.toString());
 		
 		Animal a3 = new Animal("Canary",4,"Serinus canaria domestica",t);	
 		System.out.println(a3);
+		
+		Animal a4 = new Animal("Platypus",5,"Ornithorhynchus anatinus");
+		Taxonomy platypust = new Taxonomy("Eukaryote","animalia","Chordata","mammalia","monotremata","Ornithorhynchidae","Ornithorhynchus","Ornithorhynchus anatius");
+		
+		Animal a5=new Animal(null, (Integer) null, null);
 	}
+	
 
 }
