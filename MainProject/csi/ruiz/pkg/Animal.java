@@ -60,7 +60,8 @@ public class Animal {
 name: %s
 age:  %d
 scientificName: %s
-taxonomy: %s""",name, age,scientificName, taxonomy.toString());
+taxonomy: %s
+""",name, age,scientificName, taxonomy);
 				
 				return tomas;
 	}
