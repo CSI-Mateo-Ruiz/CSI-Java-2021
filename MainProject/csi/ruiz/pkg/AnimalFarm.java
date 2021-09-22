@@ -21,7 +21,7 @@ public class AnimalFarm {
 	public static void printAnimals() {
 		for (int i = 0; i < animals.length; i++) {
 			System.out.println("Animal: "+i);
-			System.out.println(animals[i]);	
+		System.out.println(animals[i]);	
 		}
 	}
 	public static void printEachAnimal() {
