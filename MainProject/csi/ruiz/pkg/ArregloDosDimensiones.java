@@ -47,15 +47,16 @@ public class ArregloDosDimensiones {
 		}
 		System.out.println("--------------------------");
 	}
-	public static void Conways(int[][] arr) {
-		System.out.println("----------Conway----------");
-		int[][] y = [x][0];
-		int[][] x = [0][y];
-		for(int a = arr[x][y];;) {
-			for(int b = a + arr[x++][y++];;) {
-				System.out.println(Arrays.toString(arr[a]));
-				System.out.println(Arrays.toString(arr[b]));
-			}
-		}
-	}
 }
+//	public static void Conways(int[][] arr) {
+//		System.out.println("----------Conway----------");
+//		int[][] y = [x][0];
+//		int[][] x = [0][y];
+//		for(int a = arr[x][y];;) {
+//			for(int b = a + arr[x++][y++];;) {
+//				System.out.println(Arrays.toString(arr[a]));
+//				System.out.println(Arrays.toString(arr[b]));
+//			}
+//		}
+//	}
+//}
