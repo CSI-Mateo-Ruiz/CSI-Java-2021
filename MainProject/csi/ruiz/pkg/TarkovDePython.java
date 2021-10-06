@@ -15,7 +15,7 @@ public class TarkovDePython {
 		double time = Math.sqrt(2*height/9.8);
 		double distance = velocity * time; 
 		System.out.println("Time: " + time + " seconds");
-		System.out.println("Distance: " + distance + " feet");
+		System.out.println("Distance: " + distance + " meters");
 		System.out.println("");
 		System.out.println("Descriptive paragraph:");
 		System.out.println();
