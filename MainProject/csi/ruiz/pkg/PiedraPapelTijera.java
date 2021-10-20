@@ -16,7 +16,7 @@ public class PiedraPapelTijera {
 	Scanner sc = new Scanner(System.in);
 	
 	//int randomNumber = r.nextInt(arr.length);
-	System.out.println("Pick Something");
+	System.out.println("Pick Something		Upper case letter ex: Piedra");
 	
 	int input = Arrays.asList(arr).indexOf(sc.nextLine());
 	String userChoice = arr[input];
