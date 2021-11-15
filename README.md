@@ -52,7 +52,8 @@ At least 300 points.
 * Polymorphism
 
 ## Suggested projects
-* Rock Paper Scissors
+* [ASCII-Art](/../../tree/main/Projects/ASCII-Art/ASCII-Art.md)
+* [DNA](/../../tree/main/Projects/DNA/DNA.md)
+* [Program-Your-Life](/../../tree/main/Projects/Program-Your-Life/Program-Your-Life.md)
 * Conway's game of life
-* Markdown Writer
 * Taxonomic data
