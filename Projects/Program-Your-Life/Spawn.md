@@ -20,10 +20,11 @@
 * [Reduce it by 3 if you are obese, be it genetic or by diet.](https://pubmed.ncbi.nlm.nih.gov/12513041/#:~:text=Conclusions%3A%20Obesity%20and%20overweight%20in,of%20death%20at%20older%20ages.)
 
 
-### Create a for loop that runs this many times.
+### Create a for-loop that runs this many times.
 * Well the years start coming and they don't stop coming.
 * Use the variable name `age` instead of `i`.
 * It should look like:
+
 ```java
 for(int age = 0; age < lifeExpectancy; age++){
 
@@ -32,4 +33,6 @@ for(int age = 0; age < lifeExpectancy; age++){
 
 <br>
 
-## [Back to Project](/../../tree/main/Projects/Program-Your-Life/Program-Your-Life.md)
+## [Next](/../../tree/main/Projects/Program-Your-Life/Make-Your-Choices.md)
+
+## [Return to Project](/../../tree/main/Projects/Program-Your-Life/Program-Your-Life.md)

@@ -9,8 +9,15 @@
 
 <br>
 
-* How much thought have you put into what you're going to use your time for?
+How much thought have you put into what you're going to use your time for?
+* Consider what you would like the primary purpose of your life to be. Service of others? Procreation? To create something? To be famous? To make money?
+* It's up to you to chose and plan a fulfilling life. Money will come. What will you use it as a tool for?
+
+<br>
+
+Most of us will go through the same phases, with slight variations.  
 * Segment your expected phases using `if else` statements and age ranges.
+* place it within your `age` loop.
   * This will vary by person. 
     * Some may chose to study Engineering, Medicine or Law amongst many other professions.
     * Some may not.  
@@ -20,6 +27,8 @@
 // -----=====88888=====-----
 //    Lifetime accounting
 // -----=====88888=====-----
+
+// Formative years
 if(age<18){
 }
 ```
@@ -62,5 +71,8 @@ else {
 
 
 
+<br>
 
-## [Back to Project](/../../tree/main/Projects/Program-Your-Life/Program-Your-Life.md)
+## [Next](/../../tree/main/Projects/Program-Your-Life/Calculate-Your-Expenses.md)
+
+## [Return to Project](/../../tree/main/Projects/Program-Your-Life/Program-Your-Life.md)

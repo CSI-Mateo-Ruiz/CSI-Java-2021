@@ -3,13 +3,13 @@
 <div style="text-align:center">
   <img    src="https://static.wikia.nocookie.net/super-smash-flash-3/images/a/aa/Mr._Monopoly.gif/revision/latest/scale-to-width-down/228?cb=20140322211421"
           title="Life" 
-          width="25%" 
-          height="25%" />
+          width="20%" 
+          height="20%" />
 </div>
 
 <br>
 
-The word mortgage originates from latin and means `Death Pledge`. Mortgages may be used to acquire property, equipment, and tangible assets. Your bank will be more than happy to lend you money, given that you have a good credit score. This is not free as you must pay compounded interest.
+The word mortgage originates from latin and it's literal translation is `Death Pledge`. Mortgages may be used to acquire property, equipment, and tangible assets. Your bank will be more than happy to lend you money, given that you have a good credit score. This is not free as you must pay compounded interest.
 
 <br>
 
@@ -38,38 +38,61 @@ loans.add( new Loan("CreditCard", 0, 0.29, 0, 1) );
 * Now that you have created your loans you will need to pass your balance on to the object.
 
 ```java
+// College years 
+else if(age < 23) { 
+  String location = "IA";
+  double salary = 0;
 
-double salary = 0;
-// Tuition + fees - scholarship
-double tuition = 54_000 + 4_000 - 10_000;
-// rent + food + expenses
-double costOfLiving = 17_000;
+  // Tuition + fees - scholarship
+  double tuition = 23_000 + 4_000 - 31_000; 
+  // Dorm fees and meal plan
+  double costOfLiving = 10_000; 
+  
+  cash += salary; 
+  // Add cost to Student Loans
+  loans.get(0).principal += costOfLiving;
+  loans.get(0).principal += tuition;
+}
+```
 
-cash += salary;
-loans.get(0).principal += costOfLiving;
-loans.get(0).principal += tuition;
+<br>
+
+Differed loans don't have to be paid until a certain date. eg. `student loans until you graduate`
+* Implement a differed payment flag on your `Loan.java` class. 
+  * You may directly reference your variable or use getters and setters.
+* Some Loans are *waived* while you study(Federal loans). Some loans are not. 
+  * Loans will accrue Interest, meaning the due balance will increase with time.
+  * We will not implement this yet.
+
+```java
+  cash += salary; 
+  // Add cost to Student Loans
+  loans.get(0).principal += costOfLiving;
+  loans.get(0).principal += tuition;
+  loans.get(0).differed = true;
+}
 ```
 
 <br>
 
 ## Time to pay back those loans
-* We will make 2 new functions on out `Loan` class.
+* We will make 4 new functions on our `Loan` class.
   * makePayment()
   * getBalance()
   * getMonthlyPayment()
   * getTotalPayment()
 * You must implement them to properly pay of a loan.
-* Differed loans don't have to be paid until a certain date. eg. `student loans until you graduate`
-  * Implement a differed payment flag
+
 * [Consider this implementation for reference.](https://github.com/seycileli/Loan-Calculator/blob/master/src/Loan.java)
 * An example of what a functional `Loan` class within your loop should look like this.
 
 ```java
+
 // -----=====88888=====-----
 //           Loans
 // -----=====88888=====-----
 
-//Iterate over all loans
+// Iterate over all loans
 for (Loan loan : loans) {
   // Carry out 12 payments (monthly)
   for (int month = 0; month < 12; month++) {
@@ -84,9 +107,11 @@ for (Loan loan : loans) {
 double debt = 0;
 for(Loan loan : loans)
   debt += loan.principal;
-```
-<br>
 
+double invested = 0;
+
+// Output year-end review
+```
 
 <br>
 
@@ -95,7 +120,7 @@ When lacking the capital to invest in yourself, you may have the option to ask s
 
 Others may not have the option at all. 
 
-If you plan on asking someone for money instead of taking a loan they you must write a function to do so. This function should add the needed money into your `cash` deposit. *Remember, **nothing** is free and everything has a price.*
+If you plan on asking someone for money <u>**instead of taking a loan**</u> they you must write a function to do so. This function should add the needed money into your `cash` deposit. *Remember, **nothing** is free and everything has a price.*
 * Write the function outside of your `main`, but within your `Calculator`.
 
 ```java
@@ -118,5 +143,8 @@ You must now implement this function into your loop.
 }
 ```
 
+<br>
 
-## [Back to Project](/../../tree/main/Projects/Program-Your-Life/Program-Your-Life.md)
+## [Next](/../../tree/main/Projects/Program-Your-Life/Adulthood.md)
+
+## [Return to Project](/../../tree/main/Projects/Program-Your-Life/Program-Your-Life.md)

@@ -25,11 +25,11 @@
 
 <br>
 
-## [Loans](/../../tree/main/Projects/Program-Your-Life/Loans.md)
+## [Early-Adulthood](/../../tree/main/Projects/Program-Your-Life/Early-Adulthood.md)
 
 <br>
 
-## [Early-Adulthood](/../../tree/main/Projects/Program-Your-Life/Early-Adulthood.md)
+## [Loans](/../../tree/main/Projects/Program-Your-Life/Loans.md)
 
 <br>
 
@@ -45,6 +45,8 @@
 
 ### [Procreate](/../../tree/main/Projects/Program-Your-Life/Procreate.md)
 
+### [Investments](/../../tree/main/Projects/Program-Your-Life/Investments.md)
+
 <br>
 
-### [Don't keep on wanting money, people have loads and they're never happy.](https://www.youtube.com/watch?v=-sNWKbnaFkg&list=RD-sNWKbnaFkg)
+#### [Don't keep on wanting money, people have loads and they're never happy.](https://www.youtube.com/watch?v=-sNWKbnaFkg&list=RD-sNWKbnaFkg)
