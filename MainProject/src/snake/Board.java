@@ -25,7 +25,7 @@ public class Board extends JPanel implements ActionListener {
 	private final int DOT_SIZE = 50;
 	private final int ALL_DOTS = 50;
 	private final int RAND_POS = 10;
-	public int DELAY = 120;
+	private final int DELAY = 120;
 
 	private final int x[] = new int[ALL_DOTS];
 	private final int y[] = new int[ALL_DOTS];
@@ -35,6 +35,8 @@ public class Board extends JPanel implements ActionListener {
 	private int apple_y;
 	private int mine_x;
 	private int mine_y;
+	private int mine2_x;
+	private int mine2_y;
 
 	private int score = 0;
 
@@ -45,12 +47,14 @@ public class Board extends JPanel implements ActionListener {
 	private boolean inGame = false;
 	private boolean inStart = true;
 	private boolean inMine = true;
+	private boolean inMine2 = true;
 
 	private Timer timer;
 	private Image ball;
 	private Image apple;
 	private Image head;
 	private Image mine;
+	private Image mine2;
 
 	public Board() {
 
@@ -89,10 +93,14 @@ public class Board extends JPanel implements ActionListener {
 
 		ImageIcon iih = new ImageIcon("src/resources/head.png");
 		head = iih.getImage();
-		
-		if(inMine) {
-		ImageIcon iif = new ImageIcon("src/resources/mine.png");
-		mine = iif.getImage();
+
+		if (inMine) {
+			ImageIcon iif = new ImageIcon("src/resources/mine.png");
+			mine = iif.getImage();
+		}
+		if (inMine2) {
+			ImageIcon iig = new ImageIcon("src/resources/mine.png");
+			mine2 = iig.getImage();
 		}
 	}
 
@@ -106,6 +114,9 @@ public class Board extends JPanel implements ActionListener {
 		}
 		if (inMine) {
 			locateMine();
+		}
+		if (inMine2) {
+			locateMine2();
 		}
 		locateApple();
 
@@ -132,7 +143,7 @@ public class Board extends JPanel implements ActionListener {
 			g.setFont(title);
 			g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
 
-			String msg1 = "   Mine = 1   No Mine = 2";
+			String msg1 = "	        Dificulty: 1    2    3 ";
 			Font small = new Font("Times New Romn", Font.ITALIC, 80);
 			FontMetrics metr1 = getFontMetrics(small);
 
@@ -144,6 +155,7 @@ public class Board extends JPanel implements ActionListener {
 		if (inGame) {
 			g.drawImage(apple, apple_x, apple_y, this);
 			g.drawImage(mine, mine_x, mine_y, this);
+			g.drawImage(mine2, mine2_x, mine2_y, this);
 
 			for (int z = 0; z < dots; z++) {
 				if (z == 0) {
@@ -220,6 +232,9 @@ public class Board extends JPanel implements ActionListener {
 			if (inMine) {
 				locateMine();
 			}
+			if (inMine2) {
+				locateMine2();
+			}
 
 			Random rand = new Random();
 			int r = rand.nextInt(255);
@@ -262,6 +277,23 @@ public class Board extends JPanel implements ActionListener {
 			score--;
 			locateMine();
 		}
+	}
+
+	private void checkMine2() {
+		if ((x[0] == mine2_x) && (y[0] == mine2_y)) {
+
+			dots -= 2;
+			score--;
+			locateMine2();
+		}
+	}
+
+	private void locateMine2() {
+		int r = (int) (Math.random() * RAND_POS);
+		mine2_x = ((r * DOT_SIZE));
+
+		r = (int) (Math.random() * RAND_POS);
+		mine2_y = ((r * DOT_SIZE));
 	}
 
 	private void move() {
@@ -342,6 +374,9 @@ public class Board extends JPanel implements ActionListener {
 			if (inMine) {
 				checkMine();
 			}
+			if (inMine2) {
+				checkMine2();
+			}
 			checkCollision();
 			move();
 		}
@@ -389,18 +424,27 @@ public class Board extends JPanel implements ActionListener {
 					restart();
 					inStart = true;
 					inGame = false;
-					
+
 				}
 			}
 
 			if ((key == KeyEvent.VK_1 && (inStart))) {
-				inMine = true;
+				inMine = false;
+				inMine2 = false;
 				inStart = false;
 				inGame = true;
 				loadImages();
 			}
 			if ((key == KeyEvent.VK_2 && (inStart))) {
-				inMine = false;
+				inMine = true;
+				inMine2 = false;
+				inStart = false;
+				inGame = true;
+				loadImages();
+			}
+			if ((key == KeyEvent.VK_3 && (inStart))) {
+				inMine = true;
+				inMine2 = true;
 				inStart = false;
 				inGame = true;
 				loadImages();
