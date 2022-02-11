@@ -1,0 +1,1 @@
+package csi.ruiz.inheritance;
