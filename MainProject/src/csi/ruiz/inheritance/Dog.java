@@ -1,7 +1,5 @@
 package csi.ruiz.inheritance;
 
-import java.awt.Image;
-
 import javax.swing.ImageIcon;
 
 public class Dog {
@@ -14,6 +12,7 @@ public class Dog {
 	Boolean wild = true;
 	Boolean gender = true;
 	ImageIcon icon;
+	boolean ingame = true;
 	
 	
 	///// male = true \\\\\\\\\ ////////// female = false \\\\\\\\\\\\\
@@ -62,15 +61,17 @@ public class Dog {
 		int girth;
 		int time;
 		int color;
+		ImageIcon shit;
 		String consistency;
 
-		public Shit(int girth, int time, int color, String consistency) {
+		public Shit(int girth, int time, int color, String consistency, String imageDir) {
 			this.girth = girth;
 			this.time = time;
 			this.color = color;
 			this.consistency = consistency;
+			this.shit = new ImageIcon(getClass().getResource(imageDir));
 		}
-	}
+	} 
 
 	public class Food {
 		boolean like;
