@@ -3,7 +3,7 @@ package csi.ruiz.inheritance;
 public class GrateDane extends Dog {
 
 	public GrateDane() {
-		super("Grate Dane","black", 80, false, true,"GrateDane.png");
+		super("Grate Dane","black", 80, false, true,"GrateDane.png","maleLogo.png");
 	}
 
 	@Override

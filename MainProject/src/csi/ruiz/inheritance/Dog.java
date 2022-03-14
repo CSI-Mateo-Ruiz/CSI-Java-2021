@@ -1,5 +1,7 @@
 package csi.ruiz.inheritance;
 
+import java.awt.Point;
+
 import javax.swing.ImageIcon;
 
 public class Dog {
@@ -13,14 +15,14 @@ public class Dog {
 	Boolean gender = true;
 	ImageIcon icon;
 	boolean ingame = true;
-	
-	
+
 	///// male = true \\\\\\\\\ ////////// female = false \\\\\\\\\\\\\
 	// constructors
 
-	
-	public Dog(){}
-	public Dog(String type, String hair, int size, Boolean wild, Boolean gender,String imageDir) {
+	public Dog() {
+	}
+
+	public Dog(String type, String hair, int size, Boolean wild, Boolean gender, String imageDir, String ImageDir) {
 		super();
 		this.type = type;
 		this.hair = hair;
@@ -28,18 +30,19 @@ public class Dog {
 		this.wild = wild;
 		this.gender = gender;
 		this.icon = new ImageIcon(getClass().getResource(imageDir));
+		this.icon = new ImageIcon(getClass().getResource(imageDir));
 	}
 
 	// functions
 	void piss() {
-		if(gender == true) {
+		if (gender == true) {
 			System.out.println("raise leg");
 		}
 		System.out.println("Tssss");
 	}
 
 	Shit eat(Food f) {
-		return null;
+		return new Shit();
 	}
 
 	void die() {
@@ -50,38 +53,69 @@ public class Dog {
 	}
 
 	void wagTail() {
-		
+
 	}
-	
-	void mate(Dog D) {}
-	
+
+	void mate(Dog D) {
+	}
+
 	// Sub Classes
 
 	public class Shit {
-		int girth;
+		String girth;
 		int time;
-		int color;
-		ImageIcon shit;
+		String color;
+		ImageIcon icon;
 		String consistency;
+		Point location;
 
-		public Shit(int girth, int time, int color, String consistency, String imageDir) {
+		public Shit(String girth, int time, String color, String consistency, String imageDir, Point location) {
 			this.girth = girth;
 			this.time = time;
 			this.color = color;
 			this.consistency = consistency;
-			this.shit = new ImageIcon(getClass().getResource(imageDir));
+			this.location = location;
+			this.icon = new ImageIcon(getClass().getResource(imageDir));
 		}
-	} 
+
+		public Shit() {
+			this.girth = "wide";
+			this.time = 5;
+			this.color = "green and brown";
+			this.consistency = "Dense Milkshake";
+			this.location = new Point();
+			this.icon = new ImageIcon(getClass().getResource("shit.png"));
+		}
+
+		public Shit(Point location) {
+			super();
+			this.location = location;
+		}
+
+		public void setLocation(Point point) {
+			this.location = point;
+
+		}
+	}
 
 	public class Food {
+		ImageIcon icon;
 		boolean like;
 		boolean finish;
 		boolean healthy;
 
-		public Food(boolean like, boolean finish, boolean healthy) {
+		public Food(boolean like, boolean finish, boolean healthy, String imageDir) {
 			this.like = like;
 			this.finish = finish;
 			this.healthy = healthy;
+			this.icon = new ImageIcon(getClass().getResource(imageDir));
+		}
+
+		public Food() {
+			super();
+			this.like = true;
+			this.finish = false;
+			this.healthy = false;
 		}
 	}
 
@@ -94,16 +128,16 @@ public class Dog {
 			return ("!!! BARK!!! BARK!! WOOOF WOF!!!");
 		}
 
-		public Noise() {}
+		public Noise() {
+		}
+
 		public Noise(String loud, int time, boolean repeat) {
 			super();
 			this.loud = loud;
 			this.time = time;
 			this.repeat = repeat;
 		}
-		
-	
-		
+
 	}
 
 }
