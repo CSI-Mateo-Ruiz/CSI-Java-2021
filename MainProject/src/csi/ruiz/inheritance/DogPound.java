@@ -43,6 +43,7 @@ public class DogPound extends JPanel implements ActionListener {
 	private boolean shit;
 	private Image foods;
 	private boolean foodNeeded = true;
+	private boolean laMierdaNoSale = false;
 
 	List<Dog> dogs1 = new ArrayList<Dog>();
 	List<Dog.Shit> shit1 = new ArrayList<Dog.Shit>();
@@ -143,6 +144,7 @@ public class DogPound extends JPanel implements ActionListener {
 		if ((x[0] == food_x) && (y[0] == food_y)) {
 
 			foodNeeded = true;
+			laMierdaNoSale = true;
 			locateFood();
 		}
 	}
@@ -167,12 +169,19 @@ public class DogPound extends JPanel implements ActionListener {
 			x[z] = x[(z - 1)];
 			y[z] = y[(z - 1)];
 
-			int s = rand.nextInt(5000);
+			int s = rand.nextInt(9000);
 			if (s == 4) {
 				Dog.Shit dogpoo = dogs1.get(z - 1).eat(dogs1.get(z - 1).new Food());
 				dogpoo.setLocation(new Point(x[z], y[z]));
 				shit1.add(dogpoo);
 				
+			}
+			
+			if(laMierdaNoSale == true) {
+				Dog.Shit dogpoo = dogs1.get(z - 1).eat(dogs1.get(z - 1).new Food());
+				dogpoo.setLocation(new Point(x[z], y[z]));
+				shit1.add(dogpoo);
+				laMierdaNoSale = false;
 			}
 			
 			checkForShit();
@@ -215,7 +224,40 @@ public class DogPound extends JPanel implements ActionListener {
 			}
 		
 		int r = rand.nextInt(5);
-
+		
+		if(food_x >= x[z]) {
+			if(r == 0) {
+				rightDirection = true;
+				leftDirection = false;
+				downDirection = false;
+				upDirection = false;
+			}
+		}
+		if(food_x <= x[z]) {
+			if(r == 0) {
+				rightDirection = false;
+				leftDirection = true;
+				downDirection = false;
+				upDirection = false;
+			}
+		}
+		if(food_y >= y[z]) {
+			if(r == 0) {
+				rightDirection = false;
+				leftDirection = false;
+				downDirection = true;
+				upDirection = false;
+			}
+		}
+		if(food_y <= y[z]) {
+			if(r == 0) {
+				rightDirection = false;
+				leftDirection = false;
+				downDirection = false;
+				upDirection = true;
+			}
+		}
+		
 		if (r == 1) {
 			upDirection = true;
 			rightDirection = false;
