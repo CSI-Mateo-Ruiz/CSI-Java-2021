@@ -30,7 +30,7 @@ public class DogPound extends JPanel implements ActionListener {
 	private int ALL_DOGS = 120;
 	private final int DELAY = 100;
 	private final int RAND_POS = 10;
-	private final int DOGS_SIZE = 50;
+	private final int DOGS_SIZE = 500;
 	
 	
 
@@ -138,6 +138,21 @@ public class DogPound extends JPanel implements ActionListener {
 		r = (int) (Math.random() * RAND_POS);
 		food_y = ((r * DOGS_SIZE));
 		
+		if (food_y >= B_HEIGHT) {
+			locateFood();
+		}
+
+		if (food_y < 0) {
+			locateFood();
+		}
+
+		if (food_x >= B_WIDTH) {
+			locateFood();
+		}
+
+		if (food_x < 0) {
+			locateFood();
+		}
 	}
 	
 	private void checkForShit() {
@@ -160,8 +175,6 @@ public class DogPound extends JPanel implements ActionListener {
 
 	}
 	
-
-
 	private void move() {
 		Random rand = new Random();
 
@@ -223,7 +236,7 @@ public class DogPound extends JPanel implements ActionListener {
 				downDirection = true;
 			}
 		
-		int r = rand.nextInt(5);
+		int r = rand.nextInt(6);
 		
 		if(food_x >= x[z]) {
 			if(r == 0) {
@@ -257,6 +270,43 @@ public class DogPound extends JPanel implements ActionListener {
 				upDirection = true;
 			}
 		}
+		
+		///////////////////wow\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+		
+		if(food_x >= x[z]) {
+			if(r == 5) {
+				rightDirection = true;
+				leftDirection = false;
+				downDirection = false;
+				upDirection = false;
+			}
+		}
+		if(food_x <= x[z]) {
+			if(r == 5) {
+				rightDirection = false;
+				leftDirection = true;
+				downDirection = false;
+				upDirection = false;
+			}
+		}
+		if(food_y >= y[z]) {
+			if(r == 5) {
+				rightDirection = false;
+				leftDirection = false;
+				downDirection = true;
+				upDirection = false;
+			}
+		}
+		if(food_y <= y[z]) {
+			if(r == 5) {
+				rightDirection = false;
+				leftDirection = false;
+				downDirection = false;
+				upDirection = true;
+			}
+		}
+		
+		/////////////////////////wow\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 		
 		if (r == 1) {
 			upDirection = true;
