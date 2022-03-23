@@ -103,19 +103,25 @@ public class Dog {
 		boolean like;
 		boolean finish;
 		boolean healthy;
+		Point point;
+		
 
 		public Food(boolean like, boolean finish, boolean healthy, String imageDir) {
 			this.like = like;
 			this.finish = finish;
 			this.healthy = healthy;
 			this.icon = new ImageIcon(getClass().getResource(imageDir));
+			
 		}
 
-		public Food() {
+		public Food(Point point) {
 			super();
 			this.like = true;
 			this.finish = false;
 			this.healthy = false;
+			this.icon = new ImageIcon(getClass().getResource("dogFood.png"));
+			this.point = point;
+			
 		}
 	}
 

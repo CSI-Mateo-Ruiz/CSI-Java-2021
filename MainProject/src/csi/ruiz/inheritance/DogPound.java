@@ -30,20 +30,15 @@ public class DogPound extends JPanel implements ActionListener {
 	private int ALL_DOGS = 120;
 	private final int DELAY = 100;
 	private final int RAND_POS = 10;
-	private final int DOGS_SIZE = 500;
-	
-	
+	private final int DOGS_SIZE = 50;
 
 	private final int x[] = new int[ALL_DOGS];
 	private final int y[] = new int[ALL_DOGS];
-	private Image icon;
-	private Image Grate;
+
 	static Dog[] dogPound = new Dog[10];
-	private Timer timer;
-	private boolean shit;
-	private Image foods;
-	private boolean foodNeeded = true;
+
 	private boolean laMierdaNoSale = false;
+	private boolean FoodNeeded = true;
 
 	List<Dog> dogs1 = new ArrayList<Dog>();
 	List<Dog.Shit> shit1 = new ArrayList<Dog.Shit>();
@@ -56,14 +51,27 @@ public class DogPound extends JPanel implements ActionListener {
 	private boolean upDirection = false;
 	private boolean downDirection = false;
 
-	private int food_x;
-	private int food_y;
-	
+//	private int food_x;
+//	private int food_y;
+
+	//// 10 000 = 1 second\\\\\\\
+	//// 3 600 s = 1 hour\\\\\\\\\
+	int countdown = (60000);;
+	Timer timer = new Timer(countdown, this);
+	private boolean startTimer = false;
+
 	public DogPound() {
 
 		dogs1.add(new GrateDane());
 		initScreen();
 		locateFood();
+		if (startTimer == true) {
+			timer.start();
+			FoodNeeded = false;
+		}
+		if (timer.isRunning() == false) {
+			FoodNeeded = true;
+		}
 	}
 
 	private void initScreen() {
@@ -86,8 +94,7 @@ public class DogPound extends JPanel implements ActionListener {
 
 		setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
 		initGame();
-		
-		
+
 	}
 
 	private void initGame() {
@@ -101,9 +108,7 @@ public class DogPound extends JPanel implements ActionListener {
 
 		timer = new Timer(DELAY, this);
 		timer.start();
-		
-		ImageIcon iil = new ImageIcon(getClass().getResource("dogFood.png"));
-		foods = iil.getImage();
+
 	}
 
 	@Override
@@ -122,45 +127,35 @@ public class DogPound extends JPanel implements ActionListener {
 		for (Dog.Shit shit : shit1) {
 			g.drawImage(shit.icon.getImage(), shit.location.x, shit.location.y, this);
 		}
-			
-		if(foodNeeded) {
-		g.drawImage(foods, food_x, food_y, this);
-		foodNeeded = true;
-		}
 
+		for (int z = 0; z < food1.size(); z++) {
+			g.drawImage(food1.get(z).icon.getImage(), food1.get(z).point.x, food1.get(z).point.y, this);
+		}
+//		if (FoodNeeded == true) {
+//			g.drawImage(foods, food_x, food_y, this);
+//			startTimer = true;
+//		}
 	}
-	
+
 	private void locateFood() {
-		
-		int r = (int) (Math.random() * RAND_POS);
-		food_x = ((r * DOGS_SIZE));
 
-		r = (int) (Math.random() * RAND_POS);
-		food_y = ((r * DOGS_SIZE));
-		
-		if (food_y >= B_HEIGHT) {
-			locateFood();
-		}
+		Random rand = new Random();
+		int x = rand.nextInt(B_WIDTH);
+		int y = rand.nextInt(B_HEIGHT);
 
-		if (food_y < 0) {
-			locateFood();
-		}
+		food1.add(new Dog().new Food(new Point(x, y)));
 
-		if (food_x >= B_WIDTH) {
-			locateFood();
-		}
-
-		if (food_x < 0) {
-			locateFood();
-		}
 	}
-	
-	private void checkForShit() {
-		if ((x[0] == food_x) && (y[0] == food_y)) {
 
-			foodNeeded = true;
-			laMierdaNoSale = true;
-			locateFood();
+	private void checkForShit() {
+		for (int z = 0; z < food1.size(); z++) {
+			for (int a = 0; a < dogs1.size(); a++) {
+				if (food1.get(z).point.x == x[a] || food1.get(z).point.y == y[a]) {
+
+					laMierdaNoSale = true;
+					locateFood();
+				}
+			}
 		}
 	}
 
@@ -174,7 +169,7 @@ public class DogPound extends JPanel implements ActionListener {
 		leftDirection = false;
 
 	}
-	
+
 	private void move() {
 		Random rand = new Random();
 
@@ -184,154 +179,156 @@ public class DogPound extends JPanel implements ActionListener {
 
 			int s = rand.nextInt(9000);
 			if (s == 4) {
-				Dog.Shit dogpoo = dogs1.get(z - 1).eat(dogs1.get(z - 1).new Food());
+				Dog.Shit dogpoo = dogs1.get(z - 1).eat(dogs1.get(z - 1).new Food(new Point(x[z], y[z])));
 				dogpoo.setLocation(new Point(x[z], y[z]));
 				shit1.add(dogpoo);
-				
+
 			}
-			
-			if(laMierdaNoSale == true) {
-				Dog.Shit dogpoo = dogs1.get(z - 1).eat(dogs1.get(z - 1).new Food());
+
+			if (laMierdaNoSale == true) {
+				Dog.Shit dogpoo = dogs1.get(z - 1).eat(dogs1.get(z - 1).new Food(new Point(x[z], y[z])));
 				dogpoo.setLocation(new Point(x[z], y[z]));
 				shit1.add(dogpoo);
 				laMierdaNoSale = false;
 			}
-			
+
 			checkForShit();
 
 		}
 
 		for (int z = 0; z < dogs1.size(); z++) {
+			for (int a = 0; a < food1.size(); a++) {
 
-			if (leftDirection) {
-				x[z] -= DOG_SIZE;
-				rightDirection = false;
-				leftDirection = true;
-				upDirection = false;
-				downDirection = false;
-				
-			}
+				if (leftDirection) {
+					x[z] -= DOG_SIZE;
+					rightDirection = false;
+					leftDirection = true;
+					upDirection = false;
+					downDirection = false;
 
-			if (rightDirection) {
-				x[z] += DOG_SIZE;
-				rightDirection = true;
-				leftDirection = false;
-				upDirection = false;
-				downDirection = false;
-			}
+				}
 
-			if (upDirection) {
-				y[z] -= DOG_SIZE;
-				rightDirection = false;
-				leftDirection = false;
-				upDirection = true;
-				downDirection = false;
-			}
+				if (rightDirection) {
+					x[z] += DOG_SIZE;
+					rightDirection = true;
+					leftDirection = false;
+					upDirection = false;
+					downDirection = false;
+				}
 
-			if (downDirection) {
-				y[z] += DOG_SIZE;
-				rightDirection = false;
-				leftDirection = false;
-				upDirection = false;
-				downDirection = true;
+				if (upDirection) {
+					y[z] -= DOG_SIZE;
+					rightDirection = false;
+					leftDirection = false;
+					upDirection = true;
+					downDirection = false;
+				}
+
+				if (downDirection) {
+					y[z] += DOG_SIZE;
+					rightDirection = false;
+					leftDirection = false;
+					upDirection = false;
+					downDirection = true;
+				}
+
+				int r = rand.nextInt(6);
+
+				/////////////////////// if draw 0 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+				if (food1.get(a).point.x > x[z]) {
+					if (r == 0) {
+						rightDirection = true;
+						leftDirection = false;
+						downDirection = false;
+						upDirection = false;
+					}
+				}
+				if (food1.get(a).point.x < x[z]) {
+					if (r == 0) {
+						rightDirection = false;
+						leftDirection = true;
+						downDirection = false;
+						upDirection = false;
+					}
+				}
+				if (food1.get(a).point.y > y[z]) {
+					if (r == 0) {
+						rightDirection = false;
+						leftDirection = false;
+						downDirection = true;
+						upDirection = false;
+					}
+				}
+				if (food1.get(a).point.y < y[z]) {
+					if (r == 0) {
+						rightDirection = false;
+						leftDirection = false;
+						downDirection = false;
+						upDirection = true;
+					}
+				}
+
+				/////////////////// if draw 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+				if (food1.get(a).point.x > x[z]) {
+					if (r == 5) {
+						rightDirection = true;
+						leftDirection = false;
+						downDirection = false;
+						upDirection = false;
+					}
+				}
+				if (food1.get(a).point.x < x[z]) {
+					if (r == 5) {
+						rightDirection = false;
+						leftDirection = true;
+						downDirection = false;
+						upDirection = false;
+					}
+				}
+				if (food1.get(a).point.y > y[z]) {
+					if (r == 5) {
+						rightDirection = false;
+						leftDirection = false;
+						downDirection = true;
+						upDirection = false;
+					}
+				}
+				if (food1.get(a).point.y < y[z]) {
+					if (r == 5) {
+						rightDirection = false;
+						leftDirection = false;
+						downDirection = false;
+						upDirection = true;
+					}
+				}
+
+				if (r == 1) {
+					upDirection = true;
+					rightDirection = false;
+					leftDirection = false;
+					downDirection = false;
+				}
+				if (r == 2) {
+					downDirection = true;
+					rightDirection = false;
+					leftDirection = false;
+					upDirection = false;
+				}
+				if (r == 3) {
+					leftDirection = true;
+					rightDirection = false;
+					upDirection = false;
+					downDirection = false;
+				}
+				if (r == 4) {
+					rightDirection = true;
+					leftDirection = false;
+					upDirection = false;
+					downDirection = false;
+				}
 			}
-		
-		int r = rand.nextInt(6);
-		
-		if(food_x >= x[z]) {
-			if(r == 0) {
-				rightDirection = true;
-				leftDirection = false;
-				downDirection = false;
-				upDirection = false;
-			}
-		}
-		if(food_x <= x[z]) {
-			if(r == 0) {
-				rightDirection = false;
-				leftDirection = true;
-				downDirection = false;
-				upDirection = false;
-			}
-		}
-		if(food_y >= y[z]) {
-			if(r == 0) {
-				rightDirection = false;
-				leftDirection = false;
-				downDirection = true;
-				upDirection = false;
-			}
-		}
-		if(food_y <= y[z]) {
-			if(r == 0) {
-				rightDirection = false;
-				leftDirection = false;
-				downDirection = false;
-				upDirection = true;
-			}
-		}
-		
-		///////////////////wow\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-		
-		if(food_x >= x[z]) {
-			if(r == 5) {
-				rightDirection = true;
-				leftDirection = false;
-				downDirection = false;
-				upDirection = false;
-			}
-		}
-		if(food_x <= x[z]) {
-			if(r == 5) {
-				rightDirection = false;
-				leftDirection = true;
-				downDirection = false;
-				upDirection = false;
-			}
-		}
-		if(food_y >= y[z]) {
-			if(r == 5) {
-				rightDirection = false;
-				leftDirection = false;
-				downDirection = true;
-				upDirection = false;
-			}
-		}
-		if(food_y <= y[z]) {
-			if(r == 5) {
-				rightDirection = false;
-				leftDirection = false;
-				downDirection = false;
-				upDirection = true;
-			}
-		}
-		
-		/////////////////////////wow\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-		
-		if (r == 1) {
-			upDirection = true;
-			rightDirection = false;
-			leftDirection = false;
-			downDirection = false;
-		}
-		if (r == 2) {
-			downDirection = true;
-			rightDirection = false;
-			leftDirection = false;
-			upDirection = false;
-		}
-		if (r == 3) {
-			leftDirection = true;
-			rightDirection = false;
-			upDirection = false;
-			downDirection = false;
-		}
-		if (r == 4) {
-			rightDirection = true;
-			leftDirection = false;
-			upDirection = false;
-			downDirection = false;
-		}
 		}
 
 	}
