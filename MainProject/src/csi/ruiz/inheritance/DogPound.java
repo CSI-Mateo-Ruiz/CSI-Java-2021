@@ -2,12 +2,8 @@ package csi.ruiz.inheritance;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -15,22 +11,18 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.tools.Tool;
-
-import csi.ruiz.inheritance.Dog.Food;
+import java.math.*;
 
 public class DogPound extends JPanel implements ActionListener {
 
 	private final int B_WIDTH = 1000;
 	private final int B_HEIGHT = 800;
-	private int ALL_DOGS = 120;
+	private int ALL_DOGS = 50;
 	private final int DELAY = 100;
-	private final int RAND_POS = 10;
-	private final int DOGS_SIZE = 50;
+//	private final int RAND_POS = 10;
+//	private final int DOGS_SIZE = 50;
 
 	private final int x[] = new int[ALL_DOGS];
 	private final int y[] = new int[ALL_DOGS];
@@ -51,12 +43,9 @@ public class DogPound extends JPanel implements ActionListener {
 	private boolean upDirection = false;
 	private boolean downDirection = false;
 
-//	private int food_x;
-//	private int food_y;
-
 	//// 10 000 = 1 second\\\\\\\
 	//// 3 600 s = 1 hour\\\\\\\\\
-	int countdown = (60000);;
+	int countdown = (60_000);;
 	Timer timer = new Timer(countdown, this);
 	private boolean startTimer = false;
 
@@ -72,6 +61,7 @@ public class DogPound extends JPanel implements ActionListener {
 		if (timer.isRunning() == false) {
 			FoodNeeded = true;
 		}
+		System.out.println("testing");
 	}
 
 	private void initScreen() {
@@ -122,19 +112,27 @@ public class DogPound extends JPanel implements ActionListener {
 
 		for (int z = 0; z < dogs1.size(); z++) {
 			g.drawImage(dogs1.get(z).icon.getImage(), x[z], y[z], this);
+
 		}
 
 		for (Dog.Shit shit : shit1) {
 			g.drawImage(shit.icon.getImage(), shit.location.x, shit.location.y, this);
 		}
 
-		for (int z = 0; z < food1.size(); z++) {
-			g.drawImage(food1.get(z).icon.getImage(), food1.get(z).point.x, food1.get(z).point.y, this);
+		for (int a = 0; a < food1.size(); a++) {
+			if (food1.get(a).delay == 0) {
+				g.drawImage(food1.get(a).icon.getImage(), food1.get(a).point.x, food1.get(a).point.y, this);
+			}
 		}
-//		if (FoodNeeded == true) {
-//			g.drawImage(foods, food_x, food_y, this);
-//			startTimer = true;
-//		}
+	}
+
+	private void checkDelays() {
+		for (int a = 0; a < food1.size(); a++) {
+			if (food1.get(a).delay > 0) {
+				food1.get(a).delay -= 1;
+			}
+			System.out.println("delay = " + food1.get(a).delay);
+		}
 	}
 
 	private void locateFood() {
@@ -143,20 +141,36 @@ public class DogPound extends JPanel implements ActionListener {
 		int x = rand.nextInt(B_WIDTH);
 		int y = rand.nextInt(B_HEIGHT);
 
+		x = Math.round(x / 10) * 10;
+		y = Math.round(y / 10) * 10;
+
+		System.out.println(x + " food x");
+		System.out.println(y + " food y");
+
 		food1.add(new Dog().new Food(new Point(x, y)));
 
 	}
 
 	private void checkForShit() {
-		for (int z = 0; z < food1.size(); z++) {
-			for (int a = 0; a < dogs1.size(); a++) {
-				if (food1.get(z).point.x == x[a] || food1.get(z).point.y == y[a]) {
+		for (int z = 0; z < dogs1.size(); z++) {
+			for (int a = 0; a < food1.size(); a++) {
+				if (food1.get(a).point.x == x[z] && food1.get(a).point.y == y[z]) {
 
 					laMierdaNoSale = true;
-					locateFood();
+
+					Random rand = new Random();
+					int x = rand.nextInt(B_WIDTH);
+					int y = rand.nextInt(B_HEIGHT);
+					food1.get(a).point.x = Math.round(x / 10) * 10;
+					food1.get(a).point.y = Math.round(y / 10) * 10;
+
+					food1.get(a).delay = 100;
+
+					System.out.println("i ate food");
 				}
 			}
 		}
+
 	}
 
 	public void restart() {
@@ -198,6 +212,10 @@ public class DogPound extends JPanel implements ActionListener {
 
 		for (int z = 0; z < dogs1.size(); z++) {
 			for (int a = 0; a < food1.size(); a++) {
+
+				System.out.print(x[z]);
+				System.out.print(" , ");
+				System.out.println(y[z]);
 
 				if (leftDirection) {
 					x[z] -= DOG_SIZE;
@@ -363,6 +381,7 @@ public class DogPound extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		checkCollision();
 		move();
+		checkDelays();
 		repaint();
 	}
 

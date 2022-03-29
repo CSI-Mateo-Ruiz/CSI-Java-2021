@@ -104,6 +104,7 @@ public class Dog {
 		boolean finish;
 		boolean healthy;
 		Point point;
+		int delay = 10;
 		
 
 		public Food(boolean like, boolean finish, boolean healthy, String imageDir) {
