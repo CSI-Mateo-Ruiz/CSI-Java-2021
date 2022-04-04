@@ -22,23 +22,41 @@ public class Dog {
 	public Dog() {
 	}
 
-	public Dog(String type, String hair, int size, Boolean wild, Boolean gender, String imageDir, String ImageDir) {
+	public Dog(String name, String type, String hair, int size, Boolean wild, Boolean gender, String imageDir) {
 		super();
+		this.name = name;
 		this.type = type;
 		this.hair = hair;
 		this.size = size;
 		this.wild = wild;
 		this.gender = gender;
 		this.icon = new ImageIcon(getClass().getResource(imageDir));
-		this.icon = new ImageIcon(getClass().getResource(imageDir));
 	}
 
 	// functions
-	void piss() {
-		if (gender == true) {
-			System.out.println("raise leg");
+	public class Piss {
+		ImageIcon icon;
+		Point location;
+		
+		
+		public Piss(Point location, String imageDir) {
+			this.location = location;
+			this.icon = new ImageIcon(getClass().getResource(imageDir));
 		}
-		System.out.println("Tssss");
+		public Piss() {
+			this.location = new Point();
+			this.icon = new ImageIcon(getClass().getResource("piss.png"));
+		}
+		
+		public Piss(Point location) {
+			super();
+			this.location = location;
+		}
+
+		public void setLocation(Point point) {
+			this.location = point;
+			
+		}
 	}
 
 	Shit eat(Food f) {
@@ -105,14 +123,13 @@ public class Dog {
 		boolean healthy;
 		Point point;
 		int delay = 10;
-		
 
 		public Food(boolean like, boolean finish, boolean healthy, String imageDir) {
 			this.like = like;
 			this.finish = finish;
 			this.healthy = healthy;
 			this.icon = new ImageIcon(getClass().getResource(imageDir));
-			
+
 		}
 
 		public Food(Point point) {
@@ -122,8 +139,23 @@ public class Dog {
 			this.healthy = false;
 			this.icon = new ImageIcon(getClass().getResource("dogFood.png"));
 			this.point = point;
-			
 		}
+	}
+
+	public class Gender {
+		boolean male;
+		boolean female;
+		Point point;
+		ImageIcon icon;
+
+		public Gender(boolean male, boolean female, Point point, String imageDir) {
+			this.male = male;
+			this.female = female;
+			this.point = point;
+			this.icon = new ImageIcon(new ImageIcon(getClass().getResource(imageDir)).getImage().getScaledInstance(10,
+					10, java.awt.Image.SCALE_SMOOTH));
+		}
+
 	}
 
 	public class Noise {

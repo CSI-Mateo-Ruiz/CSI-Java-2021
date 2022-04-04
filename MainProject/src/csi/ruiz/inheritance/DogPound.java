@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+
 import java.math.*;
 
 public class DogPound extends JPanel implements ActionListener {
@@ -31,10 +33,14 @@ public class DogPound extends JPanel implements ActionListener {
 
 	private boolean laMierdaNoSale = false;
 	private boolean FoodNeeded = true;
+	boolean pisss = false;
+	boolean tookApiss = false;
 
 	List<Dog> dogs1 = new ArrayList<Dog>();
 	List<Dog.Shit> shit1 = new ArrayList<Dog.Shit>();
 	List<Dog.Food> food1 = new ArrayList<Dog.Food>();
+	List<Dog.Gender> gender1 = new ArrayList<Dog.Gender>();
+	List<Dog.Piss> piss1 = new ArrayList<Dog.Piss>();
 
 	private int DOG_SIZE = 10;
 
@@ -43,8 +49,7 @@ public class DogPound extends JPanel implements ActionListener {
 	private boolean upDirection = false;
 	private boolean downDirection = false;
 
-	//// 10 000 = 1 second\\\\\\\
-	//// 3 600 s = 1 hour\\\\\\\\\
+	/// yo no se que es esto de el timer pero si lo borro no funciona \\\\\\\\\\\\\\
 	int countdown = (60_000);;
 	Timer timer = new Timer(countdown, this);
 	private boolean startTimer = false;
@@ -52,6 +57,8 @@ public class DogPound extends JPanel implements ActionListener {
 	public DogPound() {
 
 		dogs1.add(new GrateDane());
+		// dogs1.add(new Dog("suleika", "Grate Dane", "black", 80, false, false,
+		// "GrateDane.png"));
 		initScreen();
 		locateFood();
 		if (startTimer == true) {
@@ -124,6 +131,13 @@ public class DogPound extends JPanel implements ActionListener {
 				g.drawImage(food1.get(a).icon.getImage(), food1.get(a).point.x, food1.get(a).point.y, this);
 			}
 		}
+		if (pisss == true) {
+			System.out.println("now im taking a piss");
+			for (Dog.Piss piss : piss1) {
+				g.drawImage(piss.icon.getImage(), piss.location.x, piss.location.y, this);
+				tookApiss = true;
+			}
+		}
 	}
 
 	private void checkDelays() {
@@ -132,6 +146,7 @@ public class DogPound extends JPanel implements ActionListener {
 				food1.get(a).delay -= 1;
 			}
 			System.out.println("delay = " + food1.get(a).delay);
+			System.out.println(" ");
 		}
 	}
 
@@ -164,7 +179,7 @@ public class DogPound extends JPanel implements ActionListener {
 					food1.get(a).point.x = Math.round(x / 10) * 10;
 					food1.get(a).point.y = Math.round(y / 10) * 10;
 
-					food1.get(a).delay = 100;
+					food1.get(a).delay = 500;
 
 					System.out.println("i ate food");
 				}
@@ -186,17 +201,19 @@ public class DogPound extends JPanel implements ActionListener {
 
 	private void move() {
 		Random rand = new Random();
+		
+		if(tookApiss == true) {
+			pisss = false;
+		}
 
 		for (int z = dogs1.size(); z > 0; z--) {
 			x[z] = x[(z - 1)];
 			y[z] = y[(z - 1)];
 
-			int s = rand.nextInt(9000);
-			if (s == 4) {
-				Dog.Shit dogpoo = dogs1.get(z - 1).eat(dogs1.get(z - 1).new Food(new Point(x[z], y[z])));
-				dogpoo.setLocation(new Point(x[z], y[z]));
-				shit1.add(dogpoo);
-
+			int s = rand.nextInt(2);
+			if (s <= 1) {
+				pisss = true;
+				System.out.println("taking a piss");				
 			}
 
 			if (laMierdaNoSale == true) {
@@ -213,9 +230,12 @@ public class DogPound extends JPanel implements ActionListener {
 		for (int z = 0; z < dogs1.size(); z++) {
 			for (int a = 0; a < food1.size(); a++) {
 
+				System.out.print(dogs1.get(z).name);
+				System.out.println("   z: " + z);
 				System.out.print(x[z]);
 				System.out.print(" , ");
 				System.out.println(y[z]);
+				System.out.println(" ");
 
 				if (leftDirection) {
 					x[z] -= DOG_SIZE;
@@ -348,7 +368,6 @@ public class DogPound extends JPanel implements ActionListener {
 				}
 			}
 		}
-
 	}
 
 	private void checkCollision() {
